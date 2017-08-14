@@ -13,22 +13,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import ClockSensor from "./sensors/ClockSensor";
-import DummySensor from "./sensors/DummySensor";
+export default class ClockSensor {
+    constructor() {
 
-const sensors = [
-    new DummySensor(1),
-    new ClockSensor(),
-]
+    }
 
-const onMeasurement = (m) => {
-    console.log(JSON.stringify(m));
-};
+    async initialize() {
 
-Promise.all(sensors.map(s => s.initialize())).then(() => {
-    setInterval(() => {
-        Promise.all(sensors.map(s => s.getValues())).then(values => {
-            onMeasurement(values.reduce((p, v) => ({...p, ...v}), {}));
-        });
-    }, 1000);
-});
+    }
+
+    async getValues() {
+        return {timestamp: new Date()};
+    }
+}
