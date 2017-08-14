@@ -1,0 +1,15 @@
+# KDevelop files.
+.kdev4/
+*.kdev4
+.directory
+
+# Build files.
+node_modules/
+yarn.lock
+yarn-error.log
+*/bundle.js
+*/bundle.css
+.directory
+build/
+production/
+coverage/

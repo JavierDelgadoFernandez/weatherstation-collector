@@ -1,0 +1,23 @@
+{
+    "name": "weatherstation-collector",
+    "version": "0.1.0",
+    "description": "WeatherStation application that connects with different hardware sensors and sends the metrics to weatherstation-be.",
+    "repository": "https://github.com/javierdelgadofernandez/weatherstation-collector",
+    "author": "Javier Delgado <JavierDelgado@outlook.com>",
+    "license": "GPLv3",
+    "scripts": {
+        "start": "babel-node src/main.js",
+        "linter": "eslint src/"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "babel-cli": "^6.24.1",
+        "babel-core": "^6.25.0",
+        "babel-eslint": "^7.2.3",
+        "babel-preset-es2015-node5": "^1.2.0",
+        "babel-preset-stage-3": "^6.24.1",
+        "babel-register": "^6.24.1",
+        "eslint": "^4.3.0"
+    }
+}
