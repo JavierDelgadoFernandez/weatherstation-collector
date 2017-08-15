@@ -13,22 +13,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import BMP280 from "./sensors/BMP280";
-import ClockSensor from "./sensors/ClockSensor";
+import bme280Sensor from "bme280-sensor";
 
-const sensors = [
-    new BMP280(),
-    new ClockSensor(),
-]
+export default class BMP280 {
+    constructor() {
+        const options = {
+            i2cAddress: bme280Sensor.BME280_DEFAULT_I2C_ADDRESS(),
+            i2cBusNo: 1,
+        };
 
-const onMeasurement = (m) => {
-    console.log(JSON.stringify(m));
-};
+        this.sensor = new bme280Sensor(options);
+    }
 
-Promise.all(sensors.map(s => s.initialize())).then(() => {
-    setInterval(() => {
-        Promise.all(sensors.map(s => s.getValues())).then(values => {
-            onMeasurement(values.reduce((p, v) => ({...p, ...v}), {}));
-        });
-    }, 1000);
-});
+    async initialize() {
+        await this.sensor.init();
+    }
+
+    async getValues() {
+        const data = await this.sensor.readSensorData();
+        return {pressure: data.pressure_hPa};
+    }
+}
