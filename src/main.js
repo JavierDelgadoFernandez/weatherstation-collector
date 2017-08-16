@@ -15,10 +15,12 @@
 
 import BMP280 from "./sensors/BMP280";
 import ClockSensor from "./sensors/ClockSensor";
+import DS18B20 from "./sensors/DS18B20";
 
 const sensors = [
     new BMP280(),
     new ClockSensor(),
+    new DS18B20(),
 ]
 
 const onMeasurement = (m) => {

@@ -10,7 +10,8 @@
         "linter": "eslint src/"
     },
     "dependencies": {
-        "bme280-sensor": "^0.1.6"
+        "bme280-sensor": "^0.1.6",
+        "ds18b20": "^0.1.0"
     },
     "devDependencies": {
         "babel-cli": "^6.24.1",
