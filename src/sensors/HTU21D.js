@@ -13,26 +13,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import BMP280 from "./sensors/BMP280";
-import ClockSensor from "./sensors/ClockSensor";
-import DS18B20 from "./sensors/DS18B20";
-import HTU21D from "./sensors/HTU21D";
+import i2cHtu21d from "htu21d-i2c";
 
-const sensors = [
-    new BMP280(),
-    new ClockSensor(),
-    new DS18B20(),
-    new HTU21D(),
-]
+export default class HTU21D {
+    constructor() {
+        this.sensor = new i2cHtu21d();
+    }
 
-const onMeasurement = (m) => {
-    console.log(JSON.stringify(m));
-};
+    async initialize() {
 
-Promise.all(sensors.map(s => s.initialize())).then(() => {
-    setInterval(() => {
-        Promise.all(sensors.map(s => s.getValues())).then(values => {
-            onMeasurement(values.reduce((p, v) => ({...p, ...v}), {}));
+    }
+
+    getValues() {
+        return new Promise((onsuccess) => {
+            this.sensor.readHumidity(v => onsuccess({humidity: v}));
         });
-    }, 1000);
-});
+    }
+}
