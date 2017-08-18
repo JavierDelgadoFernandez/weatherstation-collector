@@ -17,6 +17,7 @@ import BMP280 from "./sensors/BMP280";
 import ClockSensor from "./sensors/ClockSensor";
 import DS18B20 from "./sensors/DS18B20";
 import HTU21D from "./sensors/HTU21D";
+import axios from "axios";
 
 const sensors = [
     new BMP280(),
@@ -26,7 +27,7 @@ const sensors = [
 ]
 
 const onMeasurement = (m) => {
-    console.log(JSON.stringify(m));
+    axios.post("http://localhost:3002/api/measure", m);
 };
 
 Promise.all(sensors.map(s => s.initialize())).then(() => {
